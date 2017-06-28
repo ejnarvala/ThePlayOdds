@@ -1,0 +1,34 @@
+{% extends "ffsim/header.html" %}
+{% block content %}
+        <div class="main">
+            <div class="title_container">
+                <div class="titlebox">
+                    <div id="title">
+                        <h1 class="noselect">The Play Odds</h1>
+                    </div>
+                    <div id="subtitle">
+                        <h2 class="noselect">A Fantasy Football Playoff Seed Prediction Tool<br>Based on the Monte Carlo Method</h2>
+                    </div>
+                    <div id="inputbox">
+                        <script type="text/javascript">
+                            function toggleButton(ref,bttnID){
+                                if(ref.value != ""){
+                                    document.getElementById(bttnID).removeAttribute("disabled");
+                                } else{
+                                    document.getElementById(bttnID).setAttribute("disabled","disabled");
+                                }
+                            }
+                        </script>
+                        <form method="GET" action='/results/'>
+                            <input name="espn-url" id="espn_url" type="text" placeholder="ESPN Fantasy Team URL" onfocus="this.placeholder''" onblur="this.placeholder = 'ESPN Fantasy Team URL'" onkeyup="toggleButton(this,'go_button')"></input>
+                            <input id="go_button" type="submit" value="GO"></input>
+                        </form>
+                        <a href='/contact/' style="color: #fff; font-size: 20px; font-family: Raleway; font-weight: 300; text-decoration: none;">
+                          <br />Contact
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "ffsim/header.html" %}
+
+{% block content %}
+
+<div class="main" style="font-size: 28px">
+  <div class="title_container">
+    <div class="titlebox">
+      <h2 id=subtitle>
+        {% for c in content %}
+          {{c}} <br />
+        {% endfor %}
+        <br/>
+
+        <a href='/' id="return" style="color: #fff; font-size: 20px; font-family: Raleway; font-weight: 300; text-decoration: none;"">Return</a>
+      </h2>
+    </div>
+    <div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
