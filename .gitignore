@@ -1,1 +1,4 @@
-mysite/secret_settings.py
+py3f/
+*.pyc
+playodds.py
+__pycache__/
