@@ -14,7 +14,6 @@ def index():
 		except (ValueError, KeyError) as e:
 			error = 'Invalid URL'
 			return render_template('index.html', error=error)
-
 		try:
 			results = simulator.simulate(leagueId)
 		except Exception as e:
