@@ -1,0 +1,3 @@
+[submodule "PlayOddsEngine"]
+	path = PlayOddsEngine
+	url = https://github.com/suprabhatgurrala/PlayOddsEngine.git
