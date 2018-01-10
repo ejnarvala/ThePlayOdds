@@ -30,7 +30,7 @@
                     </tr>
                     {% for i in range(1, results['league_info']['num_teams']) %}
                         <tr>
-                            <td><img class="logo" src="{{ results['team_data'][i]['logo'] }}"></td>
+                            <td><img class="logo" src="{{ results['team_data'][i]['logo'] }}" onerror="this.src='{{url_for('static', filename='img/default_logo.png')}}'"></td>
                             <td>{{ results['team_data'][i]['name'] }}</td>
                             <td>{{ results['team_data'][i]['owner'] }}</td>
                             <td>{{ results['team_data'][i]['wins'] }}</td>
