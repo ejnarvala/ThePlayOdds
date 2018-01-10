@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, abort
-from Playodds_Engine import simulator, extractor
+from PlayOddsEngine import simulator, extractor
 
 app = Flask(__name__)
 
@@ -17,12 +17,11 @@ def index():
 		try:
 			results = simulator.simulate(leagueId)
 		except Exception as e:
+			print(str(e))
 			error = 'Simulator Error has Occurred! :O'
 			return render_template('index.html', error=error)
 
 		return render_template('results.html', results=results)
-
-
 	return render_template('index.html', error=error)
 
 @app.route("/info")

@@ -100,8 +100,6 @@ html{
 }
 
 
-
-
 #subtitle{
     font-family: Raleway;
     font-size: 1em;
@@ -235,7 +233,7 @@ a{
   animation-fill-mode: forwards;
 }
 
-table {
+#results {
     opacity: 0;
     animation: fadein 2s;
     animation-delay: 1.2s;
@@ -244,19 +242,27 @@ table {
     border: 5px rgb(255,75,30) solid;
     font-family: 'Raleway';
     font-weight: 600;
+    font-size: .6em !important;
     color: white;
     background-color: rgba(27, 78, 133, 0.7);
     margin: auto;
-    /*width: 50%;*/
-    max-width: 100%;
-}
-
-td {
-    border: 0px white dashed;
-    padding: 6px;
-}
-
-#table_results{
+    width: 80%;
+    height: 75%
     text-align: center;
-    padding-top: 100px;
 }
+
+table {
+    overflow-x: scroll;
+}
+
+td, th{
+    border: 0px white dashed;
+    padding: 4px;
+    min-width: 15px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
