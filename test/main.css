@@ -1,0 +1,43 @@
+body {
+    background: url('floodlights.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+html, body {
+    height: 100%;
+}
+
+.noselect {
+    user-select: none;
+}
+
+.title {
+    font-family: Lobster, cursive;
+    color: rgb(255,75,30);
+    border-bottom: 5px solid;
+    padding-bottom: 5px;
+    font-size: 7em;
+}
+@media (max-width: 767px) {
+    .title{
+        font-size: 4em;
+    }
+}
+.subtitle {
+    font-family: Raleway;
+    color: rgb(215, 230, 255);
+}
+
+.outline{
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+a, a:visited{
+    border: none !important;
+    font-family: Raleway;
+    font-size: 1.4em !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}

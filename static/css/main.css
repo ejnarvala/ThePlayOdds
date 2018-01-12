@@ -1,268 +1,43 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-
-
-
-
-html{
-    background: #000428;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+body {
     background: url('floodlights.jpg') no-repeat center center fixed;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    overflow: hidden;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
+    -o-background-size: cover;
 }
 
-@media screen and (max-width: 800px)  {
-    html{
-        background: url('floodlights.jpg') no-repeat center center fixed;
-        min-height: 100%;
-        min-width: none;
-        overflow: hidden;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        /*background: #16222A;  /* fallback for old browsers
-        background: -webkit-linear-gradient(to top, #3A6073, #16222A);  /* Chrome 10-25, Safari 5.1-6
-        background: linear-gradient(to top, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
-        background-size: cover;
-*/
-  }
+html, body {
+    height: 100%;
 }
+
 .noselect {
     user-select: none;
 }
 
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+.title {
+    font-family: Lobster, cursive;
+    color: rgb(255,75,30);
+    border-bottom: 5px solid;
+    padding-bottom: 5px;
+    font-size: 7em;
 }
-@keyframes fadefromblack {
-    from { background: black; }
-    to   { background: none; }
-}
-
-
-
-.main {
-    background: black;
-    animation: fadefromblack 2s;
-    animation-fill-mode: forwards;
-}
-.main_results, .main {
-    display: table;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-.title_container {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-
-
-.titlebox {
-    text-align: center;
-    margin: auto;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-@media screen and (max-width: 800px) {
-    .titlebox {
-        text-shadow: 0px 0 black, 0 0px black, 0px 0 black, 0 0px black;
+@media (max-width: 767px) {
+    .title{
+        font-size: 4em;
     }
 }
-
-#title{
-    opacity: 0;
-    animation: fadein 2s;
-    animation-delay: .6s;
-    animation-fill-mode:forwards;
-    width: 12em;
-    margin: auto;
-    font-family: Lobster, cursive;
-    font-size: 50px;
-    color: rgb(255,75,30);
-    text-shadow: 5px black;
-    border-bottom: 5px solid;
-    padding-bottom: 7px;
-}
-
-
-#subtitle{
+.subtitle {
     font-family: Raleway;
-    font-size: 1em;
     color: rgb(215, 230, 255);
-    margin-top: 7px;
-    margin-bottom: 7px;
-    opacity: 0;
-    animation: fadein 2s;
-    animation-delay: 1.2s;
-    animation-fill-mode:forwards;
-
-}
-#inputbox{
-    height: 100%;
-    padding-top: 5px;
-    opacity: 0;
-    animation: fadein 2s;
-    animation-delay: 1.8s;
-    animation-fill-mode:forwards;
 }
 
-#error{
+.outline{
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+a, a:visited{
+    border: none !important;
     font-family: Raleway;
-    font-size: 1em;
-    color: rgb(215, 230, 255);
-    margin-top: 7px;
-    margin-bottom: 7px;
-    opacity: 0;
-    animation: fadein 2s;
-    animation-delay: 2s;
-    animation-fill-mode:forwards;
+    font-size: 1.4em !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-
-@media screen and (max-width: 800px) {
-  #title{
-    font-size: 8vw;
-    width: auto;
-  }
-  #subtitle{
-    font-size: 3vw;
-  }
-  #inputbox{
-    width: 95%;
-    font-size: 2.8vw;
-  }
-}
-
-input[type=text]{
-    width: 50%;
-    /*max-width: 12em;*/
-    min-width: 400px;
-    max-width: 600px;
-    font-family: 'Raleway', 300;
-    font-size: 15px;
-    outline: none;
-    margin: 0;
-    height: 2em;
-    color: #bcafaf;
-    text-align: center;
-    background: rgba(0,0,0,0);
-    border: none;
-    border-bottom: 2px solid rgba(215, 230, 255, 9);
-    transition: all 0.4s ease-out;
-
-    /*border-radius: 5px 0px 0px 5px;*/
-}
-
-input[type=text]:hover{
-    border: none;
-    border-bottom: 2px solid rgb(255,75,30);
-}
-input[type=text]:focus::-webkit-input-placeholder {
-    color:transparent;
-}
-input[type=text]:focus{
-    color: rgb(224, 230, 255);
-    border-bottom: 2px solid rgb(255,75,30);
-}
-
-a:link{
-  color: rgb(215, 230, 255);
-}
-a:visited{
-  color: rgb(215, 230, 255);
-}
-a:hover{
-  color: rgb(255,75,30);
-}
-input[type=submit]:hover{
-    border: none;
-    outline: 0;
-    color: rgb(255,75,30);
-}
-
-input[type=submit]:active, a:active{
-    border: none;
-    outline: none;
-    color: rgb(255,75,30);
-    transform: translateY(2px);
-    transition-duration: 0s;
-}
-
-
-input[type=submit]{
-    font-size: 15px;
-    font-family: 'Raleway', 300;
-    text-align: center;
-    width:2em;
-    outline: none;
-    vertical-align: bottom;
-    color: rgb(224, 230, 255);
-    height: 100%;
-    margin: 0;
-    background: rgba(0,0,0,0);
-    border: none;
-    transition: 0.4s ease-out;
-}
-
-a{
-  color: rgb(215, 230, 255);
-  font-size: 20px;
-  font-family: Raleway;
-  font-weight: bold;
-  text-decoration: none;
-  text-shadow: none;
-  transition: 0.4s ease-out;
-  text-emphasis-color: none;
-  opacity: 0;
-  animation: fadein 2s;
-  animation-delay: 2.0s;
-  animation-fill-mode: forwards;
-}
-
-#results {
-    opacity: 0;
-    animation: fadein 2s;
-    animation-delay: 1.2s;
-    animation-fill-mode: forwards;
-    border-collapse: collapse;
-    border: 5px rgb(255,75,30) solid;
-    font-family: 'Raleway';
-    font-weight: 600;
-    font-size: .7em !important;
-    color: white;
-    background-color: rgba(27, 78, 133, 0.7);
-    margin: auto;
-    width: 80%;
-    height: 75%
-    text-align: center;
-}
-
-table {
-    overflow-x: scroll;
-}
-
-td, th{
-    border: 0px white dashed;
-    padding: 4px;
-    min-width: 15px;
-}
-
-.logo {
-    width: 40px;
-    height: 40px;
-}
-
