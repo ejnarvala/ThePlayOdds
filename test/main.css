@@ -1,4 +1,10 @@
-body {
+@keyframes fadefromblack {
+    from { background: black; }
+    to   { background: none; }
+}
+
+html {
+    background: black;
     background: url('floodlights.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -9,7 +15,11 @@ body {
 html, body {
     height: 100%;
 }
-
+body{
+    background: black;
+    animation: fadefromblack 2s;
+    animation-fill-mode: forwards;
+}
 .noselect {
     user-select: none;
 }
@@ -34,10 +44,24 @@ html, body {
 .outline{
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+.btn{
+    color: rgb(215, 230, 255);
+    box-shadow: none;
+    border-color: rgb(215, 230, 255);
+    border-left: none;
+}
 
+.btn:hover, .btn:focus, .btn:active {
+    color: rgb(255,75,30) !important;
+    background: none !important;
+    border-color: rgb(255,75,30) !important;
+    box-shadow: none !important;
+}
 a, a:visited{
     border: none !important;
     font-family: Raleway;
     font-size: 1.4em !important;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
+

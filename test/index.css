@@ -1,18 +1,3 @@
-.btn{
-    color: rgb(215, 230, 255);
-    box-shadow: none;
-    border-color: rgb(215, 230, 255);
-    border-left: none;
-}
-
-.btn:hover, .btn:focus, .btn:active {
-    color: rgb(255,75,30) !important;
-    background: none !important;
-    border-color: rgb(255,75,30) !important;
-    box-shadow: none !important;
-}
-
-
 .form-control, .form-control:focus, .form-control:hover{
     background: none;
 /*    border-top: none;
@@ -26,3 +11,4 @@
 .form-control:hover, .form-control:focus {
     border-color: rgb(255,75,30);
 }
+
