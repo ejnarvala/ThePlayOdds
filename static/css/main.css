@@ -2,16 +2,24 @@
     from { background: black; }
     to   { background: none; }
 }
-
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 html {
     background: black;
-    background: url('{{ url_for('static', filename='img/floodlights.jpg') }}') no-repeat center center fixed;
+    background: url('../img/floodlights.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-}
 
+}
+.container{
+    opacity: 0;
+    animation: fadein 2s;
+    animation-fill-mode: forwards;
+}
 html, body {
     height: 100%;
 }
@@ -33,7 +41,7 @@ body{
 }
 @media (max-width: 767px) {
     .title{
-        font-size: 4em;
+        font-size: 3.75em;
     }
 }
 .subtitle {

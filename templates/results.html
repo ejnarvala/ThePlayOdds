@@ -1,7 +1,9 @@
 {% extends "header.html" %}
+{% block head %}
+<link  href="{{ url_for('static', filename='css/results.css')}}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block content %}
-
 <div class="container-fluid">
         <div class="text-center h-100">
             <div class="container">
@@ -14,7 +16,7 @@
             </div>
             {% if results %}
                 <div class="table-responsive table-hover table-container">
-                    <table>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Logo</th>

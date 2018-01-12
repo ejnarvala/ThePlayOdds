@@ -1,4 +1,9 @@
 {% extends "header.html" %}
+{% block head %}
+<link  href="{{ url_for('static', filename='css/index.css')}}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
 {% block content %}
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center px-3">

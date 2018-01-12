@@ -26,9 +26,9 @@ def index():
 
 @app.route("/info")
 def info():
-	content = ['Issue?', 'Open a Github issue', 'https://github.com/ejnarvala/ThePlayOdds']
-	return render_template('info.html', content=content)
+	# content = ['Issue?', 'Open a Github issue', 'https://github.com/ejnarvala/ThePlayOdds']
+	return render_template('info.html')
 
 
 if __name__== "__main__":
-	app.run()
+	app.run(debug=True)
