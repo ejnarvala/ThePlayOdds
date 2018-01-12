@@ -15,5 +15,6 @@ td {
 	border: none !important;
 }
 th {
+	border-top: none !important;
 	border-bottom-color: rgba(215, 230, 255, .5) !important;
 }

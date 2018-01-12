@@ -1,9 +1,11 @@
 {% extends "header.html" %}
 {% block head %}
 <link  href="{{ url_for('static', filename='css/results.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 {% endblock %}
 
 {% block content %}
+
 <div class="container-fluid">
         <div class="text-center h-100">
             <div class="container">
@@ -16,7 +18,7 @@
             </div>
             {% if results %}
                 <div class="table-responsive table-hover table-container">
-                    <table class="table">
+                    <table class="table" id="table-results">
                         <thead>
                             <tr>
                                 <th>Logo</th>
@@ -29,13 +31,13 @@
                                 <th>Points For</th>
                                 <th>Points Against</th>
                                 <th>Expected Wins</th>
-                                {% for j in range(1,results['league_info']['num_teams']) %}
+                                {% for j in range(1, results['league_info']['num_teams'] + 1) %}
                                     <th>Seed {{ j }}</th>
                                 {% endfor %}
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in range(1, results['league_info']['num_teams']) %}
+                            {% for i in range(1, results['league_info']['num_teams'] + 1) %}
                                 <tr>
                                     <td><img class="logo" src="{{ results['team_data'][i]['logo'] }}" onerror="this.src='{{url_for('static', filename='img/default_logo.png')}}'"></td>
                                     <td>{{ results['team_data'][i]['name'] }}</td>
@@ -47,7 +49,7 @@
                                     <td>{{ (results['team_data'][i]['points_for']) | round(2) }}</td>
                                     <td>{{ (results['team_data'][i]['points_against']) | round(2) }}</td>
                                     <td>{{ (results['team_data'][i]['expected_wins']) | round(2) }}</td>
-                                    {% for j in range(1,results['league_info']['num_teams']) %}
+                                    {% for j in range(1, results['league_info']['num_teams'] + 1) %}
                                         <td>{{ results['team_data'][i]['odds'][j] }}</td>
                                     {% endfor %}
                                 </tr>
@@ -60,4 +62,18 @@
         </div>
 </div>
 
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#table-results').DataTable({
+            "paging": false,
+            "info": false,
+            "searching": false
+        });
+    });
+</script>
 {% endblock %}
