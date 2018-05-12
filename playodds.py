@@ -19,9 +19,9 @@ def index():
 		except Exception as e:
 			print(str(e))
 			error = 'Simulator Error has Occurred! :O'
-			return render_template('index.html', error=data)
+			return render_template('index.html', error=error)
 		
-		return render_template('results.html', results=data)
+		return render_template('results.html', results=results)
 
 	return render_template('index.html', error=error)
 
