@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="container-fluid">
         <div class="text-center h-100">
             <div class="container">
                 <h1 class="noselect title outline">Results</h1>
                 {% if results %}
+
                     <h4 class="noselect subtitle outline">{{results['league_info']['name']}}</h4>
                 {% else %}
                     <h4 class="noselect subtitle outline">Nothing Found</h4>
@@ -57,14 +57,29 @@
                         </tbody>
                     </table>
                 </div>
+                <script>
+                    var results = JSON.parse('{{ results | tojson |safe }}');
+                </script>
+                <h4><a href="#" id="show_more" class="btn outline">Show More</a></h4>
             {% endif %}
             <h4><a href="/" class="btn outline">Return</a></h4>
         </div>
 </div>
 
+
+
+<div id="d3">
+</div>
+
+
+
+
+
+
 {% endblock %}
 
 {% block footer %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/viz.js')}}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
