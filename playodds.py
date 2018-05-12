@@ -15,7 +15,7 @@ def index():
 		if(not url_extracted):
 			return render_template('index.html', error=extracted_data)
 		try:
-			results = simulator.simulate(leagueId)
+			results = simulator.simulate(extracted_data)
 		except Exception as e:
 			print(str(e))
 			error = 'Simulator Error has Occurred! :O'
