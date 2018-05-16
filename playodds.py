@@ -1,8 +1,7 @@
 from flask import Flask, request, render_template, abort, jsonify, make_response
 from PlayOddsEngine import simulator, extractor
-
+import json
 app = Flask(__name__)
-
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -14,6 +13,7 @@ def index():
 		url_extracted, extracted_data = extractor.extract_leagueId(url) # returns true/fase, leagueId/error
 		if(not url_extracted):
 			return render_template('index.html', error=extracted_data)
+		
 		try:
 			results = simulator.simulate(extracted_data)
 		except Exception as e:
@@ -27,7 +27,6 @@ def index():
 
 @app.route("/info")
 def info():
-	# content = ['Issue?', 'Open a Github issue', 'https://github.com/ejnarvala/ThePlayOdds']
 	return render_template('info.html')
 
 
