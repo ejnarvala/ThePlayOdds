@@ -19,12 +19,29 @@
             <h4 class="noselect subtitle outline">A Fantasy Football Playoff Seed Prediction Tool<br>Based on the Monte Carlo Method</h4>
             <form method="POST">
                 <div class="form-row">
-                    <div class="input-group">
-                        <input class="form-control" type="text" name="espn-url" placeholder="ESPN Fantasy Team URL">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-outline-primary" name="go-button">GO</button>
-                        </div>
+                    <div class="form-group col-7">
+                      <input type="text" class="form-control" name="espn-url" placeholder="ESPN Fantasy Team URL or ID">
                     </div>
+                    <div class="form-group col-2">
+                      <select name="inputWeek" class="form-control">
+                        <option selected>Week</option>
+                        {% for i in range(1,17) %}
+                        <option>{{i}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group col-2">
+                      <select name="inputYear" class="form-control">
+                        <option selected>Year</option>
+                        {% for i in range(2005,2019) %}
+                        <option>{{i}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group col-1">
+                        <button type="submit" class="btn btn-outline-primary" name="go-button">GO</button>
+                    </div>
+
                 </div>
             </form>
             <a href="/info" class="btn outline">info</a>

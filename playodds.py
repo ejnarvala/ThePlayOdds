@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, abort, jsonify, make_response
 from PlayOddsEngine import simulator, extractor
-import json
+from PlayOddsEngine.extractor import *
+
 app = Flask(__name__)
 
 
@@ -9,16 +10,21 @@ def index():
 	error = None
 	if(request.method == 'POST'):
 		url = str(request.form['espn-url'])
-# TODO: add option to submit just leagueID by checking int(id) == id && len(id)
-		url_extracted, extracted_data = extractor.extract_leagueId(url) # returns true/fase, leagueId/error
-		if(not url_extracted):
-			return render_template('index.html', error=extracted_data)
-		
 		try:
-			results = simulator.simulate(extracted_data)
+			league_id = extractor.extract_leagueId(url)
+		except Exception as e:
+			return render_template('index.html', error=str(e))
+		try:
+			week = str(request.form['inputWeek'])
+			year = str(request.form['inputYear'])
+			week = int(week) if (not week == 'Week') else None
+			year = int(year) if (not year == 'Year') else simulator.CURRENT_SEASON
+			results = simulator.simulate(league_id, year, week)
+		except SimulatorError as e:
+			return render_template('index', error=str(e))
 		except Exception as e:
 			print(str(e))
-			error = 'Simulator Error has Occurred! :O'
+			error = 'Something went wrong!'
 			return render_template('index.html', error=error)
 		
 		return render_template('results.html', results=results)
@@ -54,10 +60,9 @@ def get_results_url(api_url):
 		# print(str(e))
 		error = 'Simulator Error has Occurred!'
 		return make_response(jsonify({'error':error}), 500)
-
 	return jsonify(results)
 
 
 
 if __name__== "__main__":
-	app.run()
+	app.run(debug=True)

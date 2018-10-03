@@ -56,7 +56,6 @@ body{
     color: rgb(215, 230, 255);
     box-shadow: none;
     border-color: rgb(215, 230, 255);
-    border-left: none;
 }
 
 .btn:hover, .btn:focus, .btn:active {
