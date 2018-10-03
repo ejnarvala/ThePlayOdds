@@ -6,12 +6,6 @@
 {% block content %}
 
 
-{% if error %}
-<script>
-    var error = "{{ error }}";
-    alert(error);
-</script>
-{% endif %}
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center px-3">
         <div class="text-center">
@@ -48,4 +42,13 @@
         </div>
     </div>
 </div>
+
+
+{% if error %}
+<script>
+    var error = "{{ error }}";
+    alert(error);
+</script>
+{% endif %}
+
 {% endblock %}
