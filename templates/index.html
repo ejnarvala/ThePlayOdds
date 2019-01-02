@@ -5,19 +5,18 @@
 
 {% block content %}
 
-
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center px-3">
         <div class="text-center">
             <h1 class="noselect title outline">The Play Odds</h1>
             <h4 class="noselect subtitle outline">A Fantasy Football Playoff Seed Prediction Tool<br>Based on the Monte Carlo Method</h4>
-            <form method="POST">
+            <!-- <form id="simulate-form"> -->
                 <div class="form-row">
                     <div class="form-group col-7">
-                      <input type="text" class="form-control" name="espn-url" placeholder="ESPN Fantasy Team URL or ID">
+                      <input type="text" class="form-control" id="espnURL" placeholder="ESPN Fantasy Team URL or ID">
                     </div>
                     <div class="form-group col-2">
-                      <select name="inputWeek" class="form-control">
+                      <select id="inputWeek" class="form-control">
                         <option selected>Week</option>
                         {% for i in range(1,17) %}
                         <option>{{i}}</option>
@@ -25,7 +24,7 @@
                       </select>
                     </div>
                     <div class="form-group col-2">
-                      <select name="inputYear" class="form-control">
+                      <select id="inputYear" class="form-control">
                         <option selected>Year</option>
                         {% for i in range(2005,2019) %}
                         <option>{{i}}</option>
@@ -33,11 +32,10 @@
                       </select>
                     </div>
                     <div class="form-group col-1">
-                        <button type="submit" class="btn btn-outline-primary" name="go-button">GO</button>
+                        <button onclick="onButtonClick()" class="btn btn-outline-primary" name="go-button">GO</button>
                     </div>
-
                 </div>
-            </form>
+            <!-- </form> -->
             <a href="/info" class="btn outline">info</a>
         </div>
     </div>
@@ -51,4 +49,67 @@
 </script>
 {% endif %}
 
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+    function setLoadingScreen(){
+        var overlay = document.createElement("div");
+        overlay.className += "overlay";
+        document.body.appendChild(overlay);
+    }
+    function removeLoadingScreen(){
+        console.log('i tried');
+    }
+
+    function onButtonClick(){
+        data = {
+            espnURL: document.getElementById('espnURL').value,
+            week: document.getElementById('inputWeek').value,
+            year: document.getElementById('inputYear').value
+        }
+        console.log('Request', JSON.stringify(data));
+        fetch('/simulate', {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+        .then(response => response.json()) // parses response to JSON
+        .then(res => {
+            console.log('Response:', res);
+            if(res.error){
+                console.error('Error:', res.error);
+                alert('An Error Occurred!');
+                removeLoadingScreen();
+            }
+        }).catch(error => console.error('Error:', error));
+        console.log('loading screen set')
+        setLoadingScreen();
+        return false;
+    }
+
+
+    // $('#simulate-form').submit(function(e){
+    //     e.preventDefault()
+    //     var form = $(this);
+    //     console.log(form.serialize());
+    //     $.ajax({ 
+    //          url   : '/simulate',
+    //          type  : 'POST',
+    //          data  : form.serialize(), // data to be submitted
+    //          success: function(response){
+    //             alert(response); // do what you like with the response
+    //          }
+    //     });
+    //     return false;
+    // })
+</script>
 {% endblock %}
