@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, abort, jsonify, make_response
+from flask import Flask, request, render_template, abort, jsonify, make_response, redirect, url_for
 from PlayOddsEngine import simulator, extractor
 from PlayOddsEngine.extractor import *
 from rq import Queue
@@ -11,9 +11,9 @@ q = Queue(connection=conn)
 
 @app.route("/")
 def index():
-	if(request.method == 'POST'):
-		return render_template('results.html', results=results)
 	return render_template('index.html')
+
+
 
 @app.route("/simulate", methods=['POST'])
 def simulate():
@@ -31,7 +31,7 @@ def simulate():
 		week = int(week) if (not week == 'Week') else None
 		year = int(year) if (not year == 'Year') else simulator.CURRENT_SEASON
 		print('sim running...')
-		results = simulator.simulate(league_id, year, week)
+		# results = simulator.simulate(league_id, year, week)
 		job = q.enqueue_call(func=simulator.simulate, args=(league_id, year, week), timeout=1000)
 		output['job_id'] = job.get_id()
 	except Exception as e:
@@ -42,10 +42,24 @@ def simulate():
 	print(output)
 	return jsonify(output)
 
+@app.route("/results/<job_id>")
+def results(job_id):
+    job = q.fetch_job(job_id)
+    if job is None:
+        response = {
+        	'status': 'unknown',
+        	}
+    else:
+        response = {
+        	'job_id': job_id,
+            'status': job.get_status(),
+            'result': job.result
+        }
+    return render_template('results.html', payload=response)
 
-@app.route("/job_status/<int:job_id>")
+
+@app.route("/job_status/<job_id>")
 def job_status(job_id):
-    q = Queue()
     job = q.fetch_job(job_id)
     if job is None:
         response = {'status': 'unknown'}
