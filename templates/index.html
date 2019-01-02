@@ -53,13 +53,14 @@
 
 {% block footer %}
 <script type="text/javascript">
+    var overlay;
     function setLoadingScreen(){
-        var overlay = document.createElement("div");
+        overlay = document.createElement("div");
         overlay.className += "overlay";
         document.body.appendChild(overlay);
     }
     function removeLoadingScreen(){
-        console.log('i tried');
+        document.body.removeChild(overlay);
     }
 
     function onButtonClick(){
@@ -68,48 +69,40 @@
             week: document.getElementById('inputWeek').value,
             year: document.getElementById('inputYear').value
         }
-        console.log('Request', JSON.stringify(data));
         fetch('/simulate', {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-        })
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, cors, *same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            redirect: "follow",
+            headers: {
+                "Content-Type": "application/json",
+                // "Content-Type": "application/x-www-form-urlencoded",
+            },
+            redirect: "follow", // manual, *follow, error
+            referrer: "no-referrer", // no-referrer, *client
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
         .then(response => response.json()) // parses response to JSON
         .then(res => {
             console.log('Response:', res);
             if(res.error){
                 console.error('Error:', res.error);
-                alert('An Error Occurred!');
-                removeLoadingScreen();
+                alert(res.error);
+            }else if(res.job_id){
+                window.location.href = '/results/' + res.job_id;
+            }else{
+                alert('Something weird went wrong');
             }
-        }).catch(error => console.error('Error:', error));
-        console.log('loading screen set')
+            removeLoadingScreen();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            removeLoadingScreen();
+        });
         setLoadingScreen();
         return false;
     }
 
-
-    // $('#simulate-form').submit(function(e){
-    //     e.preventDefault()
-    //     var form = $(this);
-    //     console.log(form.serialize());
-    //     $.ajax({ 
-    //          url   : '/simulate',
-    //          type  : 'POST',
-    //          data  : form.serialize(), // data to be submitted
-    //          success: function(response){
-    //             alert(response); // do what you like with the response
-    //          }
-    //     });
-    //     return false;
-    // })
 </script>
 {% endblock %}
