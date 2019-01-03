@@ -2,40 +2,40 @@ var resultsTable;
 
 window.onload = function() {
     resultsTable = document.getElementById('results_table');
-    setSubtitle('Status: ' + res.status);
-    if(res.result){
-        createTable(res.result);
-    }else{
-        pollJobStatus(res.job_id);
-    }
+    toggleSpinner(true);
+    pollJobStatus(res.job_id);
 };
 
+function toggleSpinner(show_spinner){
+    document.getElementById('spinner').style.display = show_spinner ? "" : "none" ;
+}
 
-function setSubtitle(){
-    output = ''
-    for(let i = 0; i < arguments.length; i++){
-        if(i > 0){
-            output += '<br>';
-        }
-        output += arguments[i];
+function setSubtitle(subtitle){
+    document.getElementById('results_subtitle').innerHTML = subtitle ? subtitle : "";
+}
+
+function setStatus(status){
+    document.getElementById('results_subtitle').innerHTML = status ? "Status: " + status : "";
+}
+
+
+function handleJobStatus(response){
+    if(response.result){
+        toggleSpinner(false);
+        createTable(response.result);
+    }else if(!response.valid_job){
+        toggleSpinner(false);
+        setStatus(response.status);
+    }else{
+        setStatus(response.status)
+        setTimeout(pollJobStatus, 2000);
     }
-    document.getElementById('results_subtitle').innerHTML = output;
 }
 
 function pollJobStatus(){
-    setTimeout(function(){
-        fetch('/job_status/' + res.job_id)
-        .then(response => response.json())
-        .then(res_json =>{
-            if(res_json.result){
-                createTable(res_json.result);
-            }else{
-                setSubtitle('Status: ' + res_json.status);
-                console.log('polling');
-                pollJobStatus();
-            }
-        })
-    }, 2000)
+    fetch('/job_status/' + res.job_id)
+    .then(response => response.json())
+    .then(res_json => handleJobStatus(res_json));
 }
 
 
