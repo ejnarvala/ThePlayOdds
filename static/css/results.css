@@ -18,3 +18,8 @@ th {
 	border-top: none !important;
 	border-bottom-color: rgba(215, 230, 255, .5) !important;
 }
+
+#spinner{
+	padding-top: 20%;
+	padding-bottom: 20%
+}

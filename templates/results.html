@@ -5,20 +5,20 @@
 {% endblock %}
 
 {% block content %}
-{% if results %}
 <script>
-    var results = JSON.parse('{{ results | tojson }}');
+    var res = JSON.parse('{{ payload | tojson }}');
 </script>
-{% endif %}
+
 <div class="container-fluid">
         <div class="text-center h-100">
             <div class="container">
                 <h1 class="noselect title outline">Results</h1>
-                <h2 id="results_subtitle" class="subtitle outline">Nothing Here Yet</h2>
-                <!-- <h4><a href="#" id="show_more" class="btn outline">Show More</a></h4> -->
+                <h2 id="results_subtitle" class="subtitle outline"></h2>
+                <h2 id="results_status" class="subtitle outline"></h2>
+                <img id="spinner" src="{{ url_for('static', filename='img/oval.svg') }}" width="150" alt="loading spinner" style="display: none;">
             </div>
-            <div id="table_container" class="table-responsive table-hover table-container" style="">
-                <table class="table" id="results_table">
+            <div id="table_container" class="table-responsive table-hover table-container">
+                <table class="table" id="results_table" style="display:none">
                     <thead>
                         <tr>
                             <th>Logo</th>
@@ -35,8 +35,7 @@
                     </thead>
                 </table>
             </div>
-            <div id="d3">
-            </div>
+
             <h4><a href="/" class="btn outline">Return</a></h4>
         </div>
 </div>
