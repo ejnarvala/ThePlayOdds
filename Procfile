@@ -1,1 +1,1 @@
-web: python worker.py & gunicorn playodds:app
+web: gunicorn playodds:app & python worker.py
